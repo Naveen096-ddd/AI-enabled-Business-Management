@@ -139,9 +139,9 @@ const HRDashboard = () => {
               width: collapsed ? collapsedWidth : expandedWidth,
               marginTop: "90px",
               height: "calc(100vh - 90px)",
-              background: darkMode
-                  ? "rgba(10,10,30,0.85)"
-                  : "rgba(255,255,255,0.85)",
+              // background: darkMode
+              //     ? "rgba(10,10,30,0.85)"
+              //     : "rgba(255,255,255,0.85)",
               backdropFilter: "blur(15px)",
               background: muiTheme.palette.background.default,
               boxShadow: darkMode
