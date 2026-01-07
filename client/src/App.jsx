@@ -12,6 +12,7 @@ const Navbar = lazy(() => import('./components/Navbar.jsx'));
 const AboutUs = lazy(() => import('./pages/navbarItems/AboutUs.jsx'));
 const Home = lazy(() => import('./components/home/Home.jsx'));
 const Contact = lazy(() => import('./pages/navbarItems/Contact.jsx'));
+const ProtectedRoute = lazy(() => import('./components/ProtectedRoute.jsx'));
 const Loader = () => (
   <Box className="flex justify-center items-center min-h-screen">
     <CircularProgress />
@@ -31,9 +32,9 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/home" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/employeeDashboard" element={<EmployeeDashboard />} />
-            <Route path="/hrDashboard" element={<HRDashboard />} />
-            <Route path="/managerDashboard" element={<ManagerDashboard />} />
+            <Route path="/employeeDashboard" element={<ProtectedRoute allowedRoles={['Employee']} ><EmployeeDashboard /></ProtectedRoute>} />
+            <Route path="/hrDashboard" element={<ProtectedRoute allowedRoles={['Hr']} ><HRDashboard /></ProtectedRoute>} />
+            <Route path="/managerDashboard" element={<ProtectedRoute allowedRoles={['Manager']} ><ManagerDashboard /> </ProtectedRoute>} />
           </Routes>
         </Suspense>
       </Router>

@@ -4,6 +4,8 @@ import {Menu as MenuIcon,AccountCircle as AccountCircleIcon,Notifications as Not
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {FaHome,FaTasks,FaProjectDiagram,FaClock,FaTrophy,FaUser,FaQuestion,} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout} from "../../app/AuthSlice";
 import Dashboard from "../../components/employeeDashboardPages/Dashboard";
 import MyPerformance from "../../components/employeeDashboardPages/MyPerformance";
 import Mytasks from "../../components/employeeDashboardPages/Mytasks";
@@ -17,6 +19,7 @@ const CustomerDashboard = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const muiTheme = useMemo(() =>
       createTheme({
         palette: {
@@ -76,7 +79,7 @@ const CustomerDashboard = () => {
             <IconButton color="inherit">
               <AccountCircleIcon sx={{ color: "#fff" }} />
             </IconButton>
-            <Button color="inherit" onClick={handleLogout}>
+            <Button color="inherit" onClick={() => dispatch(logout())}>
               Logout
             </Button>
           </Toolbar>

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../app/AuthSlice";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,35 +13,46 @@ const Login = () => {
   const [step, setStep] = useState(1);
   const [showForgot, setShowForgot] = useState(false);
   const [role, setRole] = useState("");
+  const { user, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [alert, setAlert] = useState({
     show: false,
     message: "",
     type: "",
   });
-const handleLoginSubmit = (inputEmail, inputPassword) => {
-  if (!inputEmail || !inputPassword || !role) {
-    setAlert({
-      show: true,
-      message: "❌ Please enter email, password and select role",
-      type: "error",
-    });
-    return;
-  }
-  localStorage.setItem("email", inputEmail);
-  localStorage.setItem("role", role);
-  console.log(inputEmail, inputPassword, role);
-  setAlert({
-    show: true,
-    message: `✅ Login successful as ${role.toUpperCase()}`,
-    type: "success",
-  });
-  setTimeout(() => {
-    if (role === "Hr") navigate("/hrDashboard");
-    if (role === "Employee") navigate("/employeeDashboard");
-    if (role === "Manager") navigate("/managerDashboard");
-  }, 1000);
-};
+  const handleLoginSubmit = () => {
+    if (!email || !password || !role) {
+      setAlert({
+        show: true,
+        message: "❌ Please enter email, password and select role",
+        type: "error",
+      });
+      return;
+    }
+    dispatch(loginUser({ email, password, role }));
+  };
+  useEffect(() => {
+    if (user) {
+      setAlert({
+        show: true,
+        message: `✅ Login successful as ${user.role.toUpperCase()}`,
+        type: "success",
+      });
+      setTimeout(() => {
+        if (user.role === "Hr") navigate("/hrDashboard");
+        if (user.role === "Employee") navigate("/employeeDashboard");
+        if (user.role === "Manager") navigate("/managerDashboard");
+      }, 1000);
+    }
+    if (error) {
+      setAlert({
+        show: true,
+        message: "❌ Invalid email, password or role",
+        type: "error",
+      });
+    }
+  }, [user, error, navigate]);
   const handleForgotEmailSubmit = (e) => {
     e.preventDefault();
     const emailFormate = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+[a-zA-Z]{2,4}$/;

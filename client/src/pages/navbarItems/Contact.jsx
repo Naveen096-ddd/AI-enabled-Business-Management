@@ -1,25 +1,44 @@
 import React, { useState } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
+import { createUser } from "../../apis/Api";
+import Toast from "../../components/toast/Toast";
 import "./home.css";
 
 const ContactUs = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const handleSubmitContact = (e) => {
+  const [alert, setAlert] = useState({
+    show: false,
+    message: "",
+    type: "",
+  });
+  const handleSubmitContact = async (e) => {
     e.preventDefault();
-    if (!name || !email || !message) {
-      alert("Please fill in all fields!");
-      return;
-    }
-    console.log({ name, email, message });
-    alert("✅ Message sent successfully!");
-    setName("");
-    setEmail("");
-    setMessage("");
-  };
+    try {
+      const response = await createUser({ name, email, message });
+      console.log("Contact form submitted:", response.data);
 
+      setAlert({
+        show: true,
+        message: "Message sent successfully!",
+        type: "success",
+      });
+
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      console.error(error);
+      setAlert({
+        show: true,
+        message: "An error occurred. Please try again.",
+        type: "error",
+      });
+    }
+  };
+  const closeAlert = () => setAlert({ show: false, message: "", type: "" });
   return (
     <>
       <Header />
@@ -32,17 +51,15 @@ const ContactUs = () => {
         <div className="contact-container">
           <div className="contact-card">
             <h2>Get in Touch</h2>
-            <p>
-              Have a question about our furniture? Send us a message and we'll get back to you promptly.
-            </p>
+            <p>Have a question about our furniture? Send us a message and we'll get back to you promptly.</p>
             <form onSubmit={handleSubmitContact}>
               <div className="form-group">
                 <label htmlFor="name">Name</label>
-                <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)}/>
+                <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
               </div>
               <div className="form-group">
                 <label htmlFor="message">Message</label>
@@ -50,13 +67,14 @@ const ContactUs = () => {
               </div>
               <button type="submit">Send Message</button>
             </form>
-            <p className="small-text">
-              We value your feedback and inquiries. Visit our showroom for a firsthand experience of our furniture collection.
-            </p>
+            <p className="small-text">We value your feedback and inquiries. Visit our showroom for a firsthand experience of our furniture collection.</p>
           </div>
         </div>
       </section>
       <Footer />
+      {alert.show && (
+        <Toast message={alert.message} type={alert.type} onClose={closeAlert} />
+      )}
     </>
   );
 };

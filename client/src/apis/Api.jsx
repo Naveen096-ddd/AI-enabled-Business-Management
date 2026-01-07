@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://127.0.0.1:8000/";
+const API_URL = "http://localhost:3001/";
 
 export const api = axios.create({
   baseURL: API_URL,
@@ -23,8 +23,9 @@ export const getUser = () => {
   return axios.get(`${API_URL}api/user/`);
 };
 
+//dummy api call
 export const createUser = (data) => {
-  return axios.post(`${API_URL}api/user/`, data);
+  return axios.post(`${API_URL}contactMessages`, data);
 };
 
 export const updateUser = (data) => {

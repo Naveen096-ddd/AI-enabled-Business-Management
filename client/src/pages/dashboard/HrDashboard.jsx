@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { FaTachometerAlt, FaUsers, FaClock, FaFileAlt, FaMoneyCheckAlt, FaChartLine, FaUserPlus, FaBook, FaCogs } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Logout } from "../../features/auth/authSlice";
+import { logout} from "../../app/AuthSlice";
 import DashboardPage from "../../components/hrDashboardPages/DashboardPage";
 import Employees from "../../components/hrDashboardPages/Employees";
 import Attendance from "../../components/hrDashboardPages/Attendance";
@@ -112,7 +112,7 @@ const HRDashboard = () => {
             </IconButton>
             <Button
             color="inherit"
-            onClick={() => handleLogout()}
+            onClick={() => dispatch(logout())}
             sx={{
                 fontWeight: "bold",
                 textTransform: "capitalize",

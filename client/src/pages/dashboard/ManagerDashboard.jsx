@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme, useTheme } from "@mui/material/styles";
 import {FaTachometerAlt,FaUsers,FaTasks,FaProjectDiagram,FaClock,FaFileAlt,FaChartLine,} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { logout} from "../../app/AuthSlice";
 import TeamOverview from "../../components/managerDashboardPages/TeamOverView";
 import TeamTask from "../../components/managerDashboardPages/TeamTask";
 import Projects from "../../components/managerDashboardPages/Project";
@@ -45,11 +46,6 @@ const ManagerDashboard = () => {
       }),
     [darkMode]
   );
-  const handleLogout = () => {
-    localStorage.clear();
-    sessionStorage.clear();
-    navigate("/");
-  };
   const menuItems = [
     { label: "Dashboard", icon: <FaTachometerAlt /> },
     { label: "Team Overview", icon: <FaUsers /> },
@@ -123,7 +119,7 @@ const ManagerDashboard = () => {
             </IconButton>
             <Button
               color="inherit"
-              onClick={handleLogout}
+              onClick={() => dispatch(logout())}
               sx={{
                 fontWeight: "bold",
                 textTransform: "capitalize",
