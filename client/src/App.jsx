@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import { ThemeProvider, CssBaseline, CircularProgress, Box } from '@mui/material';
 import theme from './components/footer/Theme.jsx';
