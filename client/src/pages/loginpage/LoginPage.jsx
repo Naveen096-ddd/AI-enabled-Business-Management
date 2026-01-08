@@ -1,5 +1,5 @@
 import React from "react";
-import LoginImg from "../../assets/images/loginImg.png";
+import Login from "../../assets/images/Login.png";
 import Login from "./Login";
 import "./login.css";
 import Header from "../../components/header/Header";
@@ -12,7 +12,7 @@ const LoginPage = () => {
         <div className="auth-container">
           <div className="auth-left">
             <img
-              src={LoginImg}
+              src={Login}
               alt="AI Business"
               className="auth-image"
             />
