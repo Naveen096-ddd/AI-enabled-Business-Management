@@ -46,6 +46,11 @@ const ManagerDashboard = () => {
       }),
     [darkMode]
   );
+    const handleLogout = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/login");
+  };
   const menuItems = [
     { label: "Dashboard", icon: <FaTachometerAlt /> },
     { label: "Team Overview", icon: <FaUsers /> },
@@ -119,7 +124,7 @@ const ManagerDashboard = () => {
             </IconButton>
             <Button
               color="inherit"
-              onClick={() => dispatch(logout())}
+              onClick={() => handleLogout()}
               sx={{
                 fontWeight: "bold",
                 textTransform: "capitalize",

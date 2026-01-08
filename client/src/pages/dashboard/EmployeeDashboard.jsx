@@ -48,7 +48,7 @@ const CustomerDashboard = () => {
   const handleLogout = () => {
     localStorage.clear();
     sessionStorage.clear();
-    navigate("/");
+    navigate("/login");
   };
   return (
     <ThemeProvider theme={muiTheme}>
@@ -79,7 +79,7 @@ const CustomerDashboard = () => {
             <IconButton color="inherit">
               <AccountCircleIcon sx={{ color: "#fff" }} />
             </IconButton>
-            <Button color="inherit" onClick={() => dispatch(logout())}>
+            <Button color="inherit" onClick={handleLogout}>
               Logout
             </Button>
           </Toolbar>

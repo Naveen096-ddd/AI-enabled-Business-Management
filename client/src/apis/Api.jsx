@@ -1,14 +1,11 @@
 import axios from "axios";
 
-// Use environment variable for the API URL
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "http://localhost:3001/";
 
-// Create Axios instance
 export const api = axios.create({
   baseURL: API_URL,
 });
 
-// Set Authorization header
 export const setAuthToken = (token) => {
   if (token) {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -17,23 +14,20 @@ export const setAuthToken = (token) => {
   }
 };
 
-// Clear auth token
 export const clearAuthToken = () => {
   delete api.defaults.headers.common["Authorization"];
   localStorage.removeItem("token");
-};
+}
 
-// Get user
 export const getUser = () => {
-  return api.get("api/user/"); // Axios automatically prepends API_URL
+  return axios.get(`${API_URL}api/user/`);
 };
 
-// Dummy API call (works with db.json)
+//dummy api call
 export const createUser = (data) => {
-  return api.post("contactMessages", data);
+  return axios.post(`${API_URL}contactMessages`, data);
 };
 
-// Update user
 export const updateUser = (data) => {
-  return api.put("api/user/", data);
+  return axios.put(`${API_URL}api/user/`, data);
 };

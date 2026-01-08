@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Use environment variable instead of hardcoding localhost
-const API_URL = `${import.meta.env.VITE_API_URL}/users`;
+const API_URL = "http://localhost:3001/users";
 
 /* -------- SIGNUP (POST) -------- */
 export const signupUser = createAsyncThunk(
@@ -26,7 +25,9 @@ export const loginUser = createAsyncThunk(
         `${API_URL}?email=${email}&password=${password}&role=${role}`
       );
 
-      if (res.data.length === 0) return rejectWithValue("Invalid credentials");
+      if (res.data.length === 0) {
+        return rejectWithValue("Invalid credentials");
+      }
 
       return res.data[0];
     } catch (err) {
@@ -80,7 +81,6 @@ const authSlice = createSlice({
 
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;
-
 
 
 

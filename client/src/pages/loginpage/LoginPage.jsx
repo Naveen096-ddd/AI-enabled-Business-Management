@@ -12,7 +12,7 @@ const LoginPage = () => {
         <div className="auth-container">
           <div className="auth-left">
             <img
-              src={LoginImg }
+              src={LoginImg}
               alt="AI Business"
               className="auth-image"
             />

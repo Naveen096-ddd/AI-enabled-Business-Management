@@ -50,7 +50,7 @@ const HRDashboard = () => {
     const handleLogout = () => {
     localStorage.clear();
     sessionStorage.clear();
-    navigate("/");
+    navigate("/login");
   };
   const menuItems = [
     { label: "Dashboard", icon: <FaTachometerAlt /> },
@@ -112,7 +112,8 @@ const HRDashboard = () => {
             </IconButton>
             <Button
             color="inherit"
-            onClick={() => dispatch(logout())}
+            // onClick={() => dispatch(logout())}
+            onClick={handleLogout}
             sx={{
                 fontWeight: "bold",
                 textTransform: "capitalize",

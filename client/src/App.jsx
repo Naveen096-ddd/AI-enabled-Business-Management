@@ -32,9 +32,12 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/home" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/employeeDashboard" element={<ProtectedRoute allowedRoles={['Employee']} ><EmployeeDashboard /></ProtectedRoute>} />
+            <Route path="/employeeDashboard" element={<EmployeeDashboard />} />
+            <Route path="/hrDashboard" element={<HRDashboard />} />
+            <Route path="/managerDashboard" element={<ManagerDashboard />} />
+            {/* <Route path="/employeeDashboard" element={<ProtectedRoute allowedRoles={['Employee']} ><EmployeeDashboard /></ProtectedRoute>} />
             <Route path="/hrDashboard" element={<ProtectedRoute allowedRoles={['Hr']} ><HRDashboard /></ProtectedRoute>} />
-            <Route path="/managerDashboard" element={<ProtectedRoute allowedRoles={['Manager']} ><ManagerDashboard /> </ProtectedRoute>} />
+            <Route path="/managerDashboard" element={<ProtectedRoute allowedRoles={['Manager']} ><ManagerDashboard /> </ProtectedRoute>} /> */}
           </Routes>
         </Suspense>
       </Router>

@@ -22,16 +22,38 @@ const Login = () => {
     type: "",
   });
   const handleLoginSubmit = () => {
-    if (!email || !password || !role) {
-      setAlert({
-        show: true,
-        message: "❌ Please enter email, password and select role",
-        type: "error",
-      });
-      return;
-    }
-    dispatch(loginUser({ email, password, role }));
-  };
+  if (!email || !password || !role) {
+    setAlert({
+      show: true,
+      message: "❌ Please enter email, password and select role",
+      type: "error",
+    });
+    return;
+  }
+  if (role === "Employee") {
+    navigate("/employeeDashboard");
+  } else if (role === "Hr") {
+    navigate("/hrDashboard");
+  } else {
+    navigate("/managerDashboard");
+  }
+  setAlert({
+    show: true,
+    message: "✅ Login successful",
+    type: "success",
+  });
+};
+  // const handleLoginSubmit = () => {
+  //   if (!email || !password || !role) {
+  //     setAlert({
+  //       show: true,
+  //       message: "❌ Please enter email, password and select role",
+  //       type: "error",
+  //     });
+  //     return;
+  //   }
+  //   dispatch(loginUser({ email, password, role }));
+  // };
   useEffect(() => {
     if (user) {
       setAlert({
