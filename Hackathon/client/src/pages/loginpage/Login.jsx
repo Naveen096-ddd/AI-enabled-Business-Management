@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 import { loginApi } from "../../apis/Api";
-
 const Login = () => {
   const navigate = useNavigate();
   const [showForgot, setShowForgot] = useState(false);
@@ -75,7 +74,6 @@ const Login = () => {
     e.preventDefault();
     const emailFormat =
       /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-
     if (!emailFormat.test(forgotEmail)) {
       alert("Please enter a valid email address");
       setForgotEmail("");
@@ -98,20 +96,17 @@ const Login = () => {
     e.preventDefault();
     const passwordFormat =
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
     if (!passwordFormat.test(newPassword)) {
       alert("Password must be minimum 8 characters with letters & numbers");
       setNewPassword("");
       setConfirmNewPassword("");
       return;
     }
-
     if (newPassword !== confirmNewPassword) {
       alert("Passwords do not match");
       setConfirmNewPassword("");
       return;
     }
-
     alert("Password reset successful");
     setShowForgot(false);
     setStep(1);
@@ -136,7 +131,6 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-
             <label>Password:</label>
             <input
               type="password"
@@ -144,7 +138,6 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-
             <label>Role:</label>
             <select
               value={role}
@@ -152,12 +145,11 @@ const Login = () => {
               className="role"
               required
             >
-              <option value="">Select Role</option>
-              <option value="Employee">Employee</option>
-              <option value="Hr">HR</option>
-              <option value="Manager">Manager</option>
+              <option value="" className="options">Select Role</option>
+              <option value="Employee" className="options">Employee</option>
+              <option value="Hr" className="options">HR</option>
+              <option value="Manager" className="options">Manager</option>
             </select>
-
             <div className="forgot-container">
               <button
                 type="button"
@@ -167,18 +159,14 @@ const Login = () => {
                 Forgot Password?
               </button>
             </div>
-
             <div className="signup-text">
               Don’t have an account? <Link to="/signup">Signup</Link>
             </div>
-
             <button type="submit" className="login-button">
               Login
             </button>
           </>
         )}
-
-        {/* ================= FORGOT PASSWORD ================= */}
         {showForgot && (
           <>
             {step === 1 && (
@@ -199,7 +187,6 @@ const Login = () => {
                 </button>
               </>
             )}
-
             {step === 2 && (
               <>
                 <label>Enter OTP:</label>
@@ -218,7 +205,6 @@ const Login = () => {
                 </button>
               </>
             )}
-
             {step === 3 && (
               <>
                 <label>New Password:</label>
@@ -228,7 +214,6 @@ const Login = () => {
                   onChange={(e) => setNewPassword(e.target.value)}
                   required
                 />
-
                 <label>Confirm Password:</label>
                 <input
                   type="password"
@@ -238,7 +223,6 @@ const Login = () => {
                   }
                   required
                 />
-
                 <button
                   type="button"
                   onClick={handleResetPasswordSubmit}
@@ -248,7 +232,6 @@ const Login = () => {
                 </button>
               </>
             )}
-
             <button
               type="button"
               className="back-button"
